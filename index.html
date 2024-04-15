@@ -10,29 +10,83 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
 
     <style>
+        @font-face {
+            font-family: eUkraine;
+            src: url(fonts/e-Ukraine-Thin.otf) format("opentype");
+            src: url(fonts/e-Ukraine-Thin.eot?#iefix) format("embedded-opentype"), url(fonts/e-Ukraine-Thin.woff2) format("woff2"), url(fonts/e-Ukraine-Thin.woff) format("woff"), url(fonts/e-Ukraine-Thin.ttf) format("truetype");
+            font-weight: 100;
+            font-style: normal;
+            font-display: swap
+        }
+
+        @font-face {
+            font-family: eUkraine;
+            src: url(fonts/e-Ukraine-UltraLight.otf) format("opentype");
+            src: url(fonts/e-Ukraine-UltraLight.eot?#iefix) format("embedded-opentype"), url(fonts/e-Ukraine-UltraLight.woff2) format("woff2"), url(fonts/e-Ukraine-UltraLight.woff) format("woff"), url(fonts/e-Ukraine-UltraLight.ttf) format("truetype");
+            font-weight: 200;
+            font-style: normal;
+            font-display: swap
+        }
+
+        @font-face {
+            font-family: eUkraine;
+            src: url(fonts/e-Ukraine-Light.otf) format("opentype");
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap
+        }
+
+        @font-face {
+            font-family: eUkraine;
+            src: url(fonts/e-Ukraine-Regular.otf) format("opentype");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap
+        }
+
+        @font-face {
+            font-family: eUkraine;
+            src: url(fonts/e-Ukraine-Medium.otf) format("opentype");
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap
+        }
+
+        @font-face {
+            font-family: eUkraine;
+            src: url(fonts/e-Ukraine-Medium.otf) format("opentype");
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap
+        }
+
+        @font-face {
+            font-family: eUkraine;
+            src: url(fonts/e-Ukraine-Bold.otf) format("opentype");
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap
+        }
+
         body,
-        html,
-        canvas {
+        html {
+            font-family: eUkraine;
             width: 100%;
             height: 100%;
             padding: 0;
             margin: 0;
-            overflow: hidden;
         }
 
-        .main {
-            position: relative;
-        }
-
-        .content {
-            z-index: 500;
-            color: #fff;
-            font-size: 24px;
+        .bg {
             position: absolute;
-            bottom: 20px;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            top: 0;
             left: 0;
-            right: 0;
-            text-align: center;
+            bottom: 0;
+            margin: 0;
+            overflow: hidden;
         }
 
         .mask {
@@ -45,15 +99,46 @@
             background-color: rgba(0, 0, 0, 0.02);
             backdrop-filter: blur(1px);
         }
+
+        main {
+            z-index: 400;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            color: #fff;
+            font-size: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header {
+            text-align: center;
+            padding: 12px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 12px;
+        }
+
+        .content {
+            font-size: 64px;
+            padding: 12px;
+            margin-left: 80px;
+        }
     </style>
 </head>
 
 <body>
-    <div class="main">
-        <canvas id="brain"></canvas>
-        <div class="mask"></div>
-        <div class="content">Поверх маски додати контент</div>
-    </div>
+    <main class="main">
+        <div class="header">Навігація</div>
+        <div class="content">Кафедра AI</div>
+        <div class="footer">Футер</div>
+    </main>
+
+    <canvas id="brain" class="bg"></canvas>
+    <div class="mask"></div>
 
     <script>
         var renderer, scene, camera, ww, wh, particles;
@@ -61,7 +146,7 @@
         ww = window.innerWidth,
             wh = window.innerHeight;
 
-        var centerVector = new THREE.Vector3(0, 0, 0);
+        var centerVector = new THREE.Vector3(-75, 0, 0);
         var previousTime = 0;
 
         var getImageData = function (image) {
